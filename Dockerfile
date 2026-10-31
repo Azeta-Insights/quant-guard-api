@@ -1,5 +1,9 @@
 FROM python:3.11-slim
 
+# DevSecOps Patching: Upgrade Debian OS packages & core Python tooling to patch base image CVEs
+RUN apt-get update && apt-get upgrade -y && rm -rf /var/lib/apt/lists/* && \
+    pip install --no-cache-dir --upgrade pip setuptools wheel
+
 # DevSecOps Best Practice: Create a non-root user so the app never runs as admin
 RUN groupadd -r quantgroup && useradd -r -g quantgroup quantuser
 
