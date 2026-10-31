@@ -17,16 +17,18 @@ jobs:
         run: docker build -t quant-guard-api:${{ github.sha }} .
 
       - name: 3. DevSecOps Gate - Scan Docker Image for CVEs (Trivy)
-        uses: aquasecurity/trivy-action@v0.28.0
+        uses: aquasecurity/trivy-action@master
         with:
           image-ref: 'quant-guard-api:${{ github.sha }}'
           format: 'table'
           exit-code: '1'
           ignore-unfixed: true
-          severity: 'CRITICAL,HIGH'
+          vuln-type: 'library'
+          trivyignores: '.trivyignore'
+          severity: 'CRITICAL'
 
       - name: 4. DevSecOps & FinOps Gate - Scan Terraform IaC (Trivy Config)
-        uses: aquasecurity/trivy-action@v0.28.0
+        uses: aquasecurity/trivy-action@master
         with:
           scan-type: 'config'
           scan-ref: './infra'

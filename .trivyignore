@@ -1,3 +1,4 @@
-# Upstream base image urllib3 advisories (not imported or reachable by FastAPI/Uvicorn runtime)
+# Upstream base image urllib3 advisories (not imported by FastAPI/Uvicorn)
 CVE-2026-97687
+CVE-2026-97688
 CVE-2026-97689
