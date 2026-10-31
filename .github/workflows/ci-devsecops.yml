@@ -1,0 +1,35 @@
+name: DevSecOps & FinOps Pipeline
+
+on:
+  push:
+    branches: [ "main" ]
+  pull_request:
+    branches: [ "main" ]
+
+jobs:
+  build-and-secure:
+    runs-on: ubuntu-latest
+    steps:
+      - name: 1. Checkout Source Code
+        uses: actions/checkout@v4
+
+      - name: 2. Build QuantGuard Docker Image
+        run: docker build -t quant-guard-api:${{ github.sha }} .
+
+      - name: 3. DevSecOps Gate - Scan Docker Image for CVEs (Trivy)
+        uses: aquasecurity/trivy-action@master
+        with:
+          image-ref: 'quant-guard-api:${{ github.sha }}'
+          format: 'table'
+          exit-code: '1'
+          ignore-unfixed: true
+          severity: 'CRITICAL,HIGH'
+
+      - name: 4. DevSecOps & FinOps Gate - Scan Terraform IaC (Trivy Config)
+        uses: aquasecurity/trivy-action@master
+        with:
+          scan-type: 'config'
+          scan-ref: './infra'
+          format: 'table'
+          exit-code: '1'
+          severity: 'CRITICAL,HIGH'
