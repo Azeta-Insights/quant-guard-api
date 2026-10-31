@@ -1,0 +1,22 @@
+# Python cache & virtual environments
+__pycache__/
+*.py[cod]
+*$py.class
+.venv/
+venv/
+env/
+
+# Local environment secrets (DevSecOps best practice)
+.env
+.env.*
+
+# Terraform local cache & state files (never commit state to Git)
+**/.terraform/*
+*.tfstate
+*.tfstate.*
+*.tfvars
+crash.log
+
+# OS & Editor junk
+.DS_Store
+Thumbs.db
