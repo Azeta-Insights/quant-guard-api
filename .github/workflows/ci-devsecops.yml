@@ -36,9 +36,11 @@ jobs:
           exit-code: '1'
           severity: 'CRITICAL,HIGH'
 
-      - name: 5. CD - Push to Azure Container Registry & Deploy
+      - name: 5. CD - Push to Azure Container Registry
         if: github.ref == 'refs/heads/main'
         run: |
           echo "${{ secrets.AZURE_CONTAINER_REGISTRY_PASSWORD }}" | docker login ${{ secrets.AZURE_CONTAINER_REGISTRY_SERVER }} -u ${{ secrets.AZURE_CONTAINER_REGISTRY_USERNAME }} --password-stdin
           docker tag quant-guard-api:${{ github.sha }} ${{ secrets.AZURE_CONTAINER_REGISTRY_SERVER }}/quant-guard-api:${{ github.sha }}
+          docker tag quant-guard-api:${{ github.sha }} ${{ secrets.AZURE_CONTAINER_REGISTRY_SERVER }}/quant-guard-api:latest
           docker push ${{ secrets.AZURE_CONTAINER_REGISTRY_SERVER }}/quant-guard-api:${{ github.sha }}
+          docker push ${{ secrets.AZURE_CONTAINER_REGISTRY_SERVER }}/quant-guard-api:latest
