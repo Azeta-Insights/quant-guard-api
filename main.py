@@ -45,6 +45,7 @@ def root():
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>QuantGuard | FinOps & Quantitative Risk Engine</title>
+    <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><rect width='100' height='100' rx='22' fill='%230f172a' stroke='%2338bdf8' stroke-width='6'/><path d='M25 70 L42 50 L58 60 L75 30' stroke='%2310b981' stroke-width='8' fill='none' stroke-linecap='round' stroke-linejoin='round'/><circle cx='75' cy='30' r='6' fill='%2338bdf8'/></svg>">
     <script src="https://cdn.tailwindcss.com"></script>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;600&display=swap" rel="stylesheet">
     <style>
